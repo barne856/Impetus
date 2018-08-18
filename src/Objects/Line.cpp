@@ -24,7 +24,8 @@ void PROF::Line::genLine() {
     delete shader;
     shader = new Shader();
   }
-  shader->genShader((std::string) "./res/shaders/SolidColor.glsl");
+  std::string shaderFilepath = "./res/shaders/SolidColor.glsl";
+  shader->genShader(shaderFilepath);
 
   float verticies[6] = {-0.5f, 0.0f, 0.0f, 0.5f, 0.0f, 0.0f};
   float normals[6] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
@@ -65,6 +66,6 @@ void PROF::Line::render() {
   for (unsigned int i = 0; i < componentCount; i++) {
     components[i]->render();
   }
-  GLCall(glUniform4fv(10, 1, color));
+  GLCall(glUniform4fv(11, 1, color));
   GLCall(glDrawArrays(GL_LINES, 0, 2));
 }

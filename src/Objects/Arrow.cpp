@@ -25,7 +25,8 @@ void PROF::Arrow::genArrow(float angle, float length, float width,
     delete solidColor;
     solidColor = new Shader();
   }
-  solidColor->genShader((std::string) "./res/shaders/SolidColor.glsl");
+  std::string shaderFilepath = "./res/shaders/SolidColor.glsl";
+  solidColor->genShader(shaderFilepath);
   addShader(solidColor);
 
   count = 45;
@@ -124,6 +125,6 @@ void PROF::Arrow::render() {
   for (unsigned int i = 0; i < componentCount; i++) {
     components[i]->render();
   }
-  GLCall(glUniform4fv(10, 1, colorUniform));
+  GLCall(glUniform4fv(11, 1, colorUniform));
   GLCall(glDrawArrays(GL_TRIANGLES, 0, count / 3));
 }

@@ -36,6 +36,7 @@ void PROF::Model::updateModelMatrix() {
   update();
   translation = vmath::translate(position);
   modelMatrix = translation * rotation * scaleMatrix;
+  GLCall(glUniformMatrix4fv(2, 1, GL_FALSE, modelMatrix));
 }
 
 void PROF::Model::setRotation(float angle, vmath::vec3 axis) {
@@ -48,10 +49,9 @@ void PROF::Model::setScale(float scale) {
 
 void PROF::Model::Bind() const {
   GLCall(glBindVertexArray(vertexArray));
-  GLCall(glUniformMatrix4fv(2, 1, GL_FALSE, modelMatrix));
 }
 
 void PROF::Model::render() {
-  updateModelMatrix();
   Bind();
+  updateModelMatrix();
 }

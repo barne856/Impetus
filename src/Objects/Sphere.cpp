@@ -55,7 +55,8 @@ PROF::Sphere::Sphere() : sphereModel(NULL), blinnPhong(NULL) {}
 
 void PROF::Sphere::genSphere(unsigned int recursionLevel) {
   blinnPhong = new Shader();
-  blinnPhong->genShader((std::string) "./res/shaders/BlinnPhong.glsl");
+  std::string shaderFilepath = "./res/shaders/BlinnPhong.glsl";
+  blinnPhong->genShader(shaderFilepath);
   addShader(blinnPhong);
   sphereModel = new Model();
 
@@ -128,6 +129,6 @@ void PROF::Sphere::render() {
   for (unsigned int i = 0; i < componentCount; i++) {
     components[i]->render();
   }
-  GLCall(glUniform4fv(10, 1, colorUniform));
+  GLCall(glUniform4fv(11, 1, colorUniform));
   GLCall(glDrawArrays(GL_TRIANGLES, 0, count / 3));
 }
