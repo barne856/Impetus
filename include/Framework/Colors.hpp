@@ -28,9 +28,10 @@ public:
   static const float beige[4];
   static const float gold[4];
   static const float yellow[4];
-  static bool seeded;
-
   static const float *randomColor();
+
+private:
+  static bool seeded;
 };
 } // namespace PROF
 

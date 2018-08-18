@@ -35,6 +35,7 @@ void PROF::Field::genField() {
     delete shader;
     shader = new Shader();
   }
+  fieldType = line;
   std::string shaderFilepath = "./res/shaders/Field.glsl";
   shader->genShader(shaderFilepath);
 
@@ -72,6 +73,7 @@ void PROF::Field::genFieldArrow(float ang, float length, float width,
     delete shader;
     shader = new Shader();
   }
+  fieldType = arrow;
   std::string shaderFilepath = "./res/shaders/Field.glsl";
   shader->genShader(shaderFilepath);
 
@@ -218,6 +220,13 @@ void PROF::Field::render() {
   }
   GLCall(glUniform1i(5, n));
   GLCall(glUniform4fv(11, 1, color));
-  //GLCall(glDrawArraysInstanced(GL_LINES, 0, 15, n*n));
-  GLCall(glDrawArraysInstanced(GL_TRIANGLES, 0, 15, n*n));
+  if(fieldType == line)
+  {
+    GLCall(glDrawArraysInstanced(GL_LINES, 0, 15, n*n));
+  }
+  else if(fieldType == arrow)
+  {
+    GLCall(glDrawArraysInstanced(GL_TRIANGLES, 0, 15, n*n));
+  }
+  
 }

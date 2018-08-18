@@ -11,17 +11,19 @@ typedef float (*ODEfunc)(float, float, float);
 
 namespace PROF
 {
+  enum FieldType {none, arrow, line};
 class Field : public Object
 {
   private:
     float color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     Shader *shader;
     Model *model;
-    float scale = 0.2f;
-    int n = 4*(int)(1.0f/scale);
+    float scale = 0.08f;
+    int n = 8*(int)(1.0f/scale);// increase to make arrows tighter
     GLuint angleBuffer = 0;
     GLuint angleTexture = 0;
     float* angle;
+    FieldType fieldType = none;
 
   public:
     Field();

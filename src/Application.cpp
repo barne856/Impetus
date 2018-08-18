@@ -4,18 +4,15 @@
 
 using namespace PROF;
 
+// Pendulum phase space
 float xFunc(float x, float y, float t)
 {
-    x*=5.0f*sin(t);
-    y*=5.0f*sin(t)*cos(t);
-    return x*x+y*y-1.0f;
+    return 10.0f*y;
 }
 
 float yFunc(float x, float y, float t)
 {
-    x*=5.0f*cos(t);
-    y*=5.0f*cos(t);
-    return x-y+2.0f;
+    return -sin(10.0f*x);
 }
 
 class Application : public Context
@@ -45,7 +42,7 @@ class Application : public Context
         scene.setLookat(eye, center, up);
 
         field->genFieldArrow(90.0f, 0.7f, 0.3f, 0.35f);
-        field->setColor(Colors::spaceGray);
+        field->setColor(Colors::orange);
         field->setSlope(xFunc, yFunc, 0.0f);
 
         scene.addObject(field);
@@ -55,7 +52,7 @@ class Application : public Context
     {
         float t = (float)currentTime;
         GLCall(glClear(GL_DEPTH_BUFFER_BIT));
-        GLCall(glClearBufferfv(GL_COLOR, 0, Colors::silver));
+        GLCall(glClearBufferfv(GL_COLOR, 0, Colors::spaceGray));
 
         field->setSlope(xFunc, yFunc, t);
 
