@@ -23,6 +23,8 @@ const float PROF::Colors::silver[4] = {0.9f, 0.9f, 0.9f, 1.0f};
 const float PROF::Colors::beige[4] = {0.960f, 0.960f, 0.862f, 1.0f};
 const float PROF::Colors::gold[4] = {1.0f, 0.843f, 0.0f, 1.0f};
 const float PROF::Colors::yellow[4] = {1.0f, 0.921f, 0.231f, 1.0f};
+const float PROF::Colors::cyan[4] = {0.0f, 1.0f, 1.0f, 1.0f};
+const float PROF::Colors::aquamarine[4] = {0.4f, 0.803f, 0.666f, 1.0f};
 
 const float *PROF::Colors::randomColor()
 {

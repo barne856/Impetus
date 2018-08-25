@@ -12,13 +12,13 @@ PROF::Field::~Field() {
   }
   if(angleTexture != 0)
   {
-    glDeleteTextures(1, &angleTexture);
+    GLCall(glDeleteTextures(1, &angleTexture));
   }
   if(angleBuffer != 0)
   {
-    glBindBuffer(GL_ARRAY_BUFFER, angleBuffer);
-    glUnmapBuffer(GL_ARRAY_BUFFER);
-    glDeleteBuffers(1, &angleBuffer);
+    GLCall(glBindBuffer(GL_ARRAY_BUFFER, angleBuffer));
+    GLCall(glUnmapBuffer(GL_ARRAY_BUFFER));
+    GLCall(glDeleteBuffers(1, &angleBuffer));
   }
 }
 
@@ -178,8 +178,8 @@ void PROF::Field::setSlope(ODEfunc x, ODEfunc y, float t)
   
   for(int i = 0; i < n*n; i++)
   {
-    float px = 2.0f*(float)(i%n)/(float)(n-1) - 1.0f;
-    float py = 2.0f*(float)floor(i/n)/(float)(n-1) - 1.0f;
+    float px = gridScale*(2.0f*(float)(i%n)/(float)(n-1) - 1.0f);
+    float py = gridScale*(2.0f*(float)floor(i/n)/(float)(n-1) - 1.0f);
     float dx = x(px,py,t);
     float dy = y(px,py,t);
     float s = 0.0f;
@@ -220,6 +220,7 @@ void PROF::Field::render() {
   }
   GLCall(glUniform1i(5, n));
   GLCall(glUniform4fv(11, 1, color));
+  GLCall(glBindTexture(GL_TEXTURE_BUFFER, angleTexture));
   if(fieldType == line)
   {
     GLCall(glDrawArraysInstanced(GL_LINES, 0, 15, n*n));

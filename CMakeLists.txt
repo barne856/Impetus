@@ -22,7 +22,8 @@ set(Objects
     ./src/Objects/Sphere.cpp
     ./src/Objects/Arrow.cpp
     ./src/Objects/Line.cpp
-    ./src/Objects/Field.cpp)
+    ./src/Objects/Field.cpp
+    ./src/Objects/SolutionCurve.cpp)
 
 set(SRCS ${Application} ${Framework} ${Modules} ${Objects})
 

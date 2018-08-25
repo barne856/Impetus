@@ -5,5 +5,6 @@
 #include "Objects/Arrow.hpp"
 #include "Objects/Line.hpp"
 #include "Objects/Field.hpp"
+#include "Objects/SolutionCurve.hpp"
 
 #endif//__PROF_OBJECTS__

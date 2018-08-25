@@ -21,12 +21,15 @@ class Model : public RigidBody
 
     unsigned int count;
 
+    bool mapped = false;
+
     void updateModelMatrix();
 
     public:
     Model();
     virtual ~Model();
     void genModel(float* vertices, float* normals, unsigned int count);
+    void genMappedModel(float* vertices, unsigned int count);
     void setRotation(float angle, vmath::vec3 axis);
     void setScale(float scale);
     float inline getScale() {return scaleMatrix[0][0];}

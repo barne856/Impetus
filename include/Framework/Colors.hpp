@@ -28,6 +28,8 @@ public:
   static const float beige[4];
   static const float gold[4];
   static const float yellow[4];
+  static const float cyan[4];
+  static const float aquamarine[4];
   static const float *randomColor();
 
 private:

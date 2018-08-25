@@ -5,7 +5,10 @@ PROF::Model::Model()
       rotation(vmath::mat4::identity()), translation(vmath::mat4::identity()),
       scaleMatrix(vmath::mat4::identity()) {}
 
-PROF::Model::~Model() {}
+PROF::Model::~Model() {
+  GLCall(glDeleteBuffers(1, &vertexBuffer));
+  glDeleteVertexArrays(1, &vertexArray);
+}
 
 void PROF::Model::genModel(float *vertices, float *normals, unsigned int count) {
   this->count = count;
@@ -30,6 +33,22 @@ void PROF::Model::genModel(float *vertices, float *normals, unsigned int count) 
                                    3 * sizeof(float)));
   GLCall(glVertexArrayAttribFormat(vertexArray, 1, 3, GL_FLOAT, GL_FALSE, 0));
   GLCall(glEnableVertexArrayAttrib(vertexArray, 1));
+}
+
+void PROF::Model::genMappedModel(float* vertices, unsigned int count)
+{
+  mapped = true;
+  this->count = count;
+  GLCall(glGenVertexArrays(1, &vertexArray));
+  GLCall(glBindVertexArray(vertexArray));
+  GLCall(glGenBuffers(1, &vertexBuffer));
+  GLCall(glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer));
+  GLCall(glBufferStorage(GL_ARRAY_BUFFER, sizeof(float)*count, NULL, GL_MAP_WRITE_BIT));
+  GLCall(glVertexArrayAttribBinding(vertexArray, 0, 0));
+  GLCall(glVertexArrayVertexBuffer(vertexArray, 0, vertexBuffer, 0,
+                                   3 * sizeof(float)));
+  GLCall(glVertexArrayAttribFormat(vertexArray, 0, 3, GL_FLOAT, GL_FALSE, 0));
+  GLCall(glEnableVertexArrayAttrib(vertexArray, 0));
 }
 
 void PROF::Model::updateModelMatrix() {
